@@ -49,4 +49,4 @@ export const GET = async (
   return NextResponse.json(removeEdgesAndNodes(data.site.featuredProducts));
 };
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';

@@ -90,4 +90,4 @@ export default async function Maintenance({ params }: Props) {
   );
 }
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';

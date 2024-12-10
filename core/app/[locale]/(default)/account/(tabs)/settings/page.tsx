@@ -33,4 +33,4 @@ export default async function Settings() {
   );
 }
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';

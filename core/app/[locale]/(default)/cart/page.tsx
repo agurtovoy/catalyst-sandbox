@@ -100,4 +100,4 @@ export default async function Cart() {
   );
 }
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';

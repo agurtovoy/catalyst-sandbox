@@ -58,4 +58,4 @@ export default function Account() {
   );
 }
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';

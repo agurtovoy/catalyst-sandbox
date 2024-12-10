@@ -42,4 +42,4 @@ export default async function Tag(props: Props) {
   );
 }
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';

@@ -120,4 +120,4 @@ export default async function Product(props: Props) {
   );
 }
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';

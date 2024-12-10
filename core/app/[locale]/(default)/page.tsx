@@ -76,4 +76,4 @@ export default async function Home({ params }: Props) {
   );
 }
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';

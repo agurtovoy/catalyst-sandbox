@@ -114,4 +114,4 @@ export default async function Search(props: Props) {
   );
 }
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';

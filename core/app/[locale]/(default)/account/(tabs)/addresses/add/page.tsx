@@ -105,4 +105,4 @@ export default async function AddPage() {
   );
 }
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';

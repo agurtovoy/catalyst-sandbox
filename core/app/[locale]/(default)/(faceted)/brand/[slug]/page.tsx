@@ -125,4 +125,4 @@ export default async function Brand(props: Props) {
   );
 }
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';

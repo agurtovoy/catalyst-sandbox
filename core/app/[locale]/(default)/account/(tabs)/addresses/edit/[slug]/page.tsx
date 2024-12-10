@@ -147,4 +147,4 @@ export default async function Edit({ params }: Props) {
   );
 }
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';

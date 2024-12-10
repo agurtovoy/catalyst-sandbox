@@ -141,4 +141,4 @@ export default async function Category(props: Props) {
   );
 }
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';

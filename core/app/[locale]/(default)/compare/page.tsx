@@ -373,4 +373,4 @@ export default async function Compare(props: Props) {
   );
 }
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';

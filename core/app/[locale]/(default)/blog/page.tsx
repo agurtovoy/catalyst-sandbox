@@ -58,4 +58,4 @@ export default async function Blog(props: Props) {
   );
 }
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';
