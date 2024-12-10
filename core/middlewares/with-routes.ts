@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import { NextFetchEvent, NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 
@@ -252,9 +253,17 @@ const getRouteInfo = async (request: NextRequest, event: NextFetchEvent) => {
   }
 };
 
+// See https://github.com/vercel/next.js/blob/main/packages/next/src/server/lib/server-action-request-meta.ts
+const isServerAction = ({ method, headers }: NextRequest) =>
+  method === 'POST' &&
+  (headers.get('next-action') != null ||
+    headers.get('content-type') === 'application/x-www-form-urlencoded' ||
+    headers.get('content-type')?.startsWith('multipart/form-data'));
+
 export const withRoutes: MiddlewareFactory = () => {
   return async (request, event) => {
     const locale = request.headers.get('x-bc-locale') ?? '';
+    const serverAction = isServerAction(request);
 
     const { route, status } = await getRouteInfo(request, event);
 
@@ -355,6 +364,11 @@ export const withRoutes: MiddlewareFactory = () => {
     const rewriteUrl = new URL(url, request.url);
 
     rewriteUrl.search = request.nextUrl.search;
+
+    // eslint-disable-next-line no-console
+    console.log(
+      `-> rewriting ${request.method} ${request.url} ${serverAction ? `(server action ${request.headers.get('next-action')})` : ''} to ${rewriteUrl.toString()}`,
+    );
 
     return NextResponse.rewrite(rewriteUrl);
   };

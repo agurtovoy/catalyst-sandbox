@@ -5,6 +5,8 @@ import { ArrowLeft, ArrowRight, Pause, Play } from 'lucide-react';
 import NextImage, { StaticImageData } from 'next/image';
 import { useEffect, useReducer, useState } from 'react';
 
+// import { useRouter } from '~/i18n/routing';
+import { getCartId } from '~/lib/actions';
 import { cn } from '~/lib/utils';
 
 import { Button } from '../button';
@@ -44,6 +46,34 @@ const Slideshow = ({ className, interval = 15_000, slides }: Props) => {
   const [visibilityState, setVisibilityState] = useState<
     DocumentVisibilityState | Omit<string, 'hidden' | 'visible'>
   >('');
+
+  const [cartId, setCartId] = useState<string>();
+
+  useEffect(() => {
+    const loadCard = async () => {
+      const id = await getCartId();
+
+      setCartId(id);
+      // eslint-disable-next-line no-console
+      console.log('-- server action from client: loadCard', { id });
+    };
+
+    loadCard()
+      .then(() => {
+        // eslint-disable-next-line no-console
+        console.log('-- server action from client: cart loaded');
+      })
+      // eslint-disable-next-line no-console
+      .catch((error: unknown) => console.error('-- server action from client:', error));
+  }, []);
+
+  // const router = useRouter();
+
+  // useEffect(() => {
+  //   router.replace(`${window.location.href}?cartId=${cartId}`);
+  //   // eslint-disable-next-line no-console
+  //   console.log('-- router.replace: done');
+  // }, [router, cartId]);
 
   useEffect(() => {
     const autoplay = setInterval(() => {
@@ -104,7 +134,7 @@ const Slideshow = ({ className, interval = 15_000, slides }: Props) => {
       onMouseEnter={() => setIsHoverPaused(true)}
       onMouseLeave={() => setIsHoverPaused(false)}
     >
-      <div ref={emblaRef}>
+      <div data-cart-id={cartId} ref={emblaRef}>
         <ul className="flex" id="slideshow-slides">
           {slides.map((slide, index) => (
             <li

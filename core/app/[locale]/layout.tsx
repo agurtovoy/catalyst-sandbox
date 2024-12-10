@@ -91,6 +91,9 @@ interface Props extends PropsWithChildren {
 export default async function RootLayout({ params, children }: Props) {
   const { locale } = await params;
 
+  // eslint-disable-next-line no-console
+  console.log('-- RootLayout', { locale });
+
   // need to call this method everywhere where static rendering is enabled
   // https://next-intl-docs.vercel.app/docs/getting-started/app-router#add-setRequestLocale-to-all-layouts-and-pages
   setRequestLocale(locale);
